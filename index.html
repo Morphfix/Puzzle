@@ -106,23 +106,23 @@ button:hover {
 const questions = [
   {
     q: "When did we first meet?",
-    a: "24.04.25"
+    a: ["24.04.25", "240425", "24.04.2025", "24,04,25", "24,04,2025", "April 24th 2025"]
   },
   {
     q: "Thats right! It was 24.04.25 at 3:02am. What is my favorite thing about you?",
-    a: "eyes" || "lips" || "smile" || "personality" || "everything" || "laugh" || "sense of humor" || "kindness" || "intelligence" || "heart" || "hair"
+    a: ["eyes", "lips" || "smile", "personality", "everything", "laugh", "sense of humor", "kindness", "intelligence", "heart", "hair"]
   },
   {
     q: "Every answer here is right because i love everything about you silly.. What would you say is our song?",
-    a: "Like a Tattoo" || "Lover you shouldve come over" || "One night only" || "I wanna be yours" || "Adore you" || "Yellow" || "Perfect" || "All of me" || "I dont wanna miss a thing" || "You are the reason"
+    a: ["Like a Tattoo", "Lover you shouldve come over", "One night only", "I wanna be yours", "Adore you", "Yellow", "Perfect", "All of me", "I dont wanna miss a thing", "You are the reason"]
   },
   {
     q: "Many fit here, there isnt really a right or wrong answer because every song reminds me of you. Who do I love the very very most?",
-    a: "me" || "Abi" || "abi" || "you" || "my love" || "my baby" || "my everything" || "the love of my life" || "my soulmate" || "my partner in crime" || "the one and only" || "the goat" || "the best" || "the most amazing person in the world" || "my princess" || "my queen" || "my angel" || "my sunshine" || "my heart" || "the love of my life"
+    a: ["me", "Abi", "abi", "you", "my love", "my baby", "my everything", "the love of my life", "my soulmate", "my partner in crime", "the one and only", "the goat", "the best", "the most amazing person in the world", "my princess", "my queen", "my angel", "my sunshine", "my heart", "the love of my life"]
   },
   {
     q: "Anything that resembles you in any way because i love you the most. Final task: Type 'I love you'",
-    a: "i love you" || "I love you" || "I LOVE YOU"
+    a: ["i love you", "I love you", "I LOVE YOU"]
   }
 ];
 
@@ -143,7 +143,7 @@ function loadQuestion() {
 function checkAnswer() {
   const input = document.getElementById("answer").value.toLowerCase();
 
-  if (input === questions[current].a) {
+  if (input === questions[current].a.includes(input)) {
     current++;
 
     if (current >= questions.length) {
