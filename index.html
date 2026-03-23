@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+}
+
+@keyframes gradient {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.box {
+  background: rgba(0,0,0,0.45);
+  padding: 35px;
+  border-radius: 25px;
+  width: 320px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  transition: 0.4s;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+input {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  width: 85%;
+  outline: none;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #ff6b81;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #ff4d6d;
+  transform: scale(1.05);
+}
+
+#feedback {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* 💕 floating hearts */
+.heart {
+  position: absolute;
+  color: rgba(255,255,255,0.5);
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2 id="question">Loading...</h2>
+  <input id="answer" placeholder="Type your answer..." />
+  <br>
+  <button onclick="checkAnswer()">Submit</button>
+  <p id="feedback"></p>
+</div>
+
+<script>
+// 💖 QUESTIONS (EDIT THESE)
+const questions = [
+  {
+    q: "When did we first meet?",
+    a: "24.04.25"
+  },
+  {
+    q: "Thats right! It was 24.04.25 at 3:02am.<br> What is my favorite thing about you?",
+    a: "eyes" || "lips" || "smile" || "personality" || "everything" || "laugh" || "sense of humor" || "kindness" || "intelligence" || "heart" || "hair"
+  },
+  {
+    q: "Every answer here is right because i love everything about you silly.. <br> What would you say is our song?",
+    a: "Like a Tattoo " || "Lover you shouldve come over" || "One night only" || "I wanna be yours" || "Adore you" || "Yellow" || "Perfect" || "All of me" || "I dont wanna miss a thing" || "You are the reason"
+  },
+  {
+    q: "Many fit here, there isnt really a right or wrong answer because every song reminds me of you.<br> Who do I love the very very most?",
+    a: "me" || "Abi" || "you" || "my love" || "my baby" || "my everything" || "the love of my life" || "my soulmate" || "my partner in crime" || "the one and only" || "the goat" || "the best" || "the most amazing person in the world" || "my princess" || "my queen" || "my angel" || "my sunshine" || "my heart" || "the love of my life"
+  },
+  {
+    q: "Anything that resembles you in any way because i love you the most.<br> Final question: Type 'I love you'",
+    a: "i love you"
+  }
+];
+
+let current = 0;
+
+function loadQuestion() {
+  const box = document.querySelector(".box");
+  box.style.opacity = 0;
+
+  setTimeout(() => {
+    document.getElementById("question").innerText = questions[current].q;
+    document.getElementById("answer").value = "";
+    document.getElementById("feedback").innerText = "";
+    box.style.opacity = 1;
+  }, 200);
+}
+
+function checkAnswer() {
+  const input = document.getElementById("answer").value.toLowerCase();
+
+  if (input === questions[current].a) {
+    current++;
+
+    if (current >= questions.length) {
+      showFinal();
+    } else {
+      loadQuestion();
+    }
+
+  } else {
+    document.getElementById("feedback").innerText =
+      "❌ ohno wrong answer, try again baby you got this 💖";
+  }
+}
+
+function showFinal() {
+  document.querySelector(".box").innerHTML = `
+    <h2>💖 You did it 💖</h2>
+    <p>
+      Happy Anniversary ❤️<br><br>
+      Thank you for being the most amazing person in my life.<br>
+      I genuinely don't know what I'd do without you.<br><br>
+      I love you more than anything 💕<br>
+      Now come back to the Bot to solve the Puzzle!
+    </p>
+  `;
+}
+
+// 💕 floating hearts generator
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}, 400);
+
+loadQuestion();
+</script>
+
+</body>
+</html>
