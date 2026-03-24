@@ -24,7 +24,7 @@ body {
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
-
+  
 .box {
   background: rgba(0,0,0,0.45);
   padding: 35px;
@@ -71,7 +71,6 @@ button:hover {
   opacity: 0.9;
 }
 
-/* 💕 floating hearts */
 .heart {
   position: absolute;
   color: rgba(255,255,255,0.5);
@@ -102,11 +101,10 @@ button:hover {
 </div>
 
 <script>
-// 💖 QUESTIONS (EDIT THESE)
 const questions = [
   {
     q: "When did we first meet?",
-    a: ["24.04.25", "240425", "24.04.2025", "24,04,25", "24,04,2025", "April 24th 2025"]
+    a: ["24.04.25", "240425", "24.04.2025", "24,04,25", "24,04,2025", "april 24th 2025"]
   },
   {
     q: "Thats right! It was 24.04.25 at 3:02am. What is my favorite thing about you?",
@@ -114,19 +112,26 @@ const questions = [
   },
   {
     q: "Every answer here is right because i love everything about you silly.. What would you say is our song?",
-    a: ["Like a Tattoo", "Lover you shouldve come over", "One night only", "I wanna be yours", "Adore you", "Yellow", "Perfect", "All of me", "I dont wanna miss a thing", "You are the reason"]
+    a: ["like a tattoo", "lover you shouldve come over", "one night only", "i wanna be yours", "adore you", "yellow", "perfect", "all of me", "i dont wanna miss a thing", "you are the reason"]
   },
   {
     q: "Many fit here, there isnt really a right or wrong answer because every song reminds me of you. Who do I love the very very most?",
-    a: ["me", "Abi", "abi", "you", "my love", "my baby", "my everything", "the love of my life", "my soulmate", "my partner in crime", "the one and only", "the goat", "the best", "the most amazing person in the world", "my princess", "my queen", "my angel", "my sunshine", "my heart", "the love of my life"]
+    a: ["me", "abi", "you", "my love", "my baby", "my everything", "my soulmate", "my princess", "my queen", "my angel", "my sunshine", "my heart"]
   },
   {
     q: "Anything that resembles you in any way because i love you the most. Final task: Type 'I love you'",
-    a: ["i love you", "I love you", "I LOVE YOU"]
+    a: ["i love you"]
   }
 ];
 
 let current = 0;
+
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, " ");
+}
 
 function loadQuestion() {
   const box = document.querySelector(".box");
@@ -141,9 +146,13 @@ function loadQuestion() {
 }
 
 function checkAnswer() {
-  const input = document.getElementById("answer").value.toLowerCase();
+  const input = normalize(document.getElementById("answer").value);
 
-  if (questions[current].a.some(ans => input.includes(ans.toLowerCase()))) {
+  const correct = questions[current].a.some(ans =>
+    input.includes(normalize(ans))
+  );
+
+  if (correct) {
     current++;
 
     if (current >= questions.length) {
@@ -171,7 +180,6 @@ function showFinal() {
   `;
 }
 
-// 💕 floating hearts generator
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -181,9 +189,7 @@ setInterval(() => {
 
   document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
+  setTimeout(() => heart.remove(), 6000);
 }, 400);
 
 loadQuestion();
