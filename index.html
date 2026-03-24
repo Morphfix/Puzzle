@@ -110,7 +110,7 @@ const questions = [
   },
   {
     q: "Thats right! It was 24.04.25 at 3:02am. What is my favorite thing about you?",
-    a: ["eyes", "lips" || "smile", "personality", "everything", "laugh", "sense of humor", "kindness", "intelligence", "heart", "hair"]
+    a: ["eyes", "lips", "smile", "personality", "everything", "laugh", "sense of humor", "kindness", "intelligence", "heart", "hair"]
   },
   {
     q: "Every answer here is right because i love everything about you silly.. What would you say is our song?",
@@ -143,7 +143,7 @@ function loadQuestion() {
 function checkAnswer() {
   const input = document.getElementById("answer").value.toLowerCase();
 
-  if (input === questions[current].a.includes(input)) {
+  if (questions[current].a.includes(input)) {
     current++;
 
     if (current >= questions.length) {
