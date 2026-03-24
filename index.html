@@ -143,7 +143,7 @@ function loadQuestion() {
 function checkAnswer() {
   const input = document.getElementById("answer").value.toLowerCase();
 
-  if (questions[current].a.includes(input)) {
+  if (questions[current].a.some(ans => input.includes(ans.toLowerCase()))) {
     current++;
 
     if (current >= questions.length) {
